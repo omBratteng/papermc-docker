@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Enter server directory
-cd papermc
-
 JAR_NAME=papermc-${MC_VERSION}-${PAPER_BUILD}
 
 # Perform initial setup
