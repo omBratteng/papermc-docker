@@ -14,6 +14,7 @@ RUN \
 
 # JRE base
 FROM openjdk:11.0-jre-slim
+LABEL org.opencontainers.image.source https://github.com/omBratteng/papermc-docker
 WORKDIR /papermc
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 

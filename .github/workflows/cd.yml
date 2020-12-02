@@ -15,15 +15,6 @@ jobs:
         uses: actions/checkout@v2
 
       -
-        name: Repo metadata
-        id: repo
-        uses: actions/github-script@v3
-        with:
-          script: |
-            const repo = await github.repos.get(context.repo)
-            return repo.data
-
-      -
         name: Prepare
         id: prep
         run: |
@@ -61,9 +52,9 @@ jobs:
           cache-from: type=local,src=${{ github.workspace }}/.buildx-cache
           cache-to: type=local,mode=max,dest=${{ github.workspace }}/.buildx-cache
           labels: |
-            org.opencontainers.image.url=${{ fromJson(steps.repo.outputs.result).html_url }}
-            org.opencontainers.image.source=${{ fromJson(steps.repo.outputs.result).clone_url }}
+            org.opencontainers.image.url=https://github.com/omBratteng/papermc-docker
+            org.opencontainers.image.source=https://github.com/omBratteng/papermc-docker.git
             org.opencontainers.image.version=latest
             org.opencontainers.image.created=${{ steps.prep.outputs.created }}
             org.opencontainers.image.revision=${{ github.sha }}
-            org.opencontainers.image.licenses=${{ fromJson(steps.repo.outputs.result).license.spdx_id }}
+            org.opencontainers.image.licenses=BSD-3-Clause
