@@ -33,6 +33,13 @@ jobs:
           password: ${{ secrets.CR_PAT }}
 
       -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      -
         name: Cache Docker layers
         uses: actions/cache@v2
         with:
@@ -48,7 +55,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/ombratteng/papermc:latest
+          tags: |
+            ghcr.io/ombratteng/papermc:latest
+            ombratteng/papermc:latest
           cache-from: type=local,src=${{ github.workspace }}/.buildx-cache
           cache-to: type=local,mode=max,dest=${{ github.workspace }}/.buildx-cache
           labels: |
